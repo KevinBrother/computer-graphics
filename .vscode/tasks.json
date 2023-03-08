@@ -17,6 +17,7 @@
 				"${workspaceFolder}/dependencies/library/libglfw.3.3.dylib",
 				"-o",
 				"${workspaceFolder}/app",
+				"${workspaceFolder}/glad.c",
 				"-framework",
 				"OpenGL",
 				"-framework",
