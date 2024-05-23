@@ -41,6 +41,47 @@
 				"isDefault": true
 			},
 			"detail": "编译器: /usr/bin/clang++"
+		},
+		{
+			"type": "cppbuild",
+			"label": "mooc-01",
+			"command": "/usr/bin/clang++",
+			"args": [
+				"-std=c++17",
+				"-fcolor-diagnostics",
+				"-fansi-escape-codes",
+				"-Wall",
+				"-g",
+				"-I${workspaceFolder}/dependencies/include",
+				"-L${workspaceFolder}/dependencies/library",
+				"${workspaceFolder}/mooc/01.test.cpp",
+				"${workspaceFolder}/dependencies/library/libglfw.3.4.dylib",
+				"-o",
+				"${workspaceFolder}/app",
+				"${workspaceFolder}/glad.c",
+				"-framework",
+				"OpenGL",
+				"-framework",
+				"Cocoa",
+				"-framework",
+				"IOKit",
+				"-framework",
+				"CoreVideo",
+				"-framework",
+				"CoreFoundation",
+				"-Wno-deprecated"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "编译器: /usr/bin/clang++"
 		}
 	]
 }
