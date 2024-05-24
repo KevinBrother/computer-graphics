@@ -1,2 +1,11 @@
 app
 app.dSYM
+
+CMakeFiles
+cmake_install.cmake
+CMakeCache.txt
+Makefile
+cmake_uninstall.cmake
+*.exe
+bin
+lib
