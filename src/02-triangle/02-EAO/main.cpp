@@ -151,7 +151,7 @@ int main() {
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    // draw our first triangle
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // wireframe mode 线框模式
     glUseProgram(shaderProgram);
     glBindVertexArray(VAO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);

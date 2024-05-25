@@ -28,6 +28,7 @@ brew install glad
 
 [OpenGL setup: GLFW and GLAD in Visual Studio Code on macOS](https://www.youtube.com/watch?v=7-dL6a5_B3I)
 [learn opengl](https://learnopengl.com/Introduction)
+[docs.GL](https://docs.gl/gl3/glPolygonMode)
 
 ## 问题
 
