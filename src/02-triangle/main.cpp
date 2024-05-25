@@ -112,7 +112,7 @@ int main() {
   glGenBuffers(1, &VBO);
   // bind the Vertex Array Object first, then bind and set vertex buffer(s), and
   // then configure vertex attributes(s).
-  glBindVertexArray(VAO);
+  glBindVertexArray(VAO); // 必须绑定 VAO
 
   glBindBuffer(GL_ARRAY_BUFFER, VBO);
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -131,9 +131,6 @@ int main() {
   // VBOs) when it's not directly necessary.
   glBindVertexArray(0);
 
-  // uncomment this call to draw in wireframe polygons.
-  // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
   // render loop
   // -----------
   while (!glfwWindowShouldClose(window)) {
@@ -148,11 +145,9 @@ int main() {
 
     // draw our first triangle
     glUseProgram(shaderProgram);
-    glBindVertexArray(
-        VAO); // seeing as we only have a single VAO there's no need to bind it
-              // every time, but we'll do so to keep things a bit more organized
+    //  glBindVertexArray(VBO);  使用 VBO 绘制 也可以。
+    glBindVertexArray(VAO);
     glDrawArrays(GL_TRIANGLES, 0, 3);
-    // glBindVertexArray(0); // no need to unbind it every time
 
     // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved
     // etc.)
