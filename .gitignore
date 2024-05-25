@@ -9,3 +9,5 @@ cmake_uninstall.cmake
 *.exe
 bin
 lib
+cmake-build-debug
+.idea
