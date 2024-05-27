@@ -47,7 +47,7 @@ int main()
 
   // build and compile our shader program
   // ------------------------------------
-  Shader ourShader("shader.vs.glsl", "shader.fs.glsl"); // you can name your shader files however you like
+  Shader ourShader("./resources/shader.vs.glsl", "./resources/shader.fs.glsl"); // you can name your shader files however you like
 
   // set up vertex data (and buffer(s)) and configure vertex attributes
   // ------------------------------------------------------------------
