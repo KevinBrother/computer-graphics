@@ -1,46 +1,6 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-
 #include <iostream>
-bool initWindow(GLFWwindow **window);
-void framebuffer_size_callback(GLFWwindow *window, int width, int height);
-void processInput(GLFWwindow *window);
-
-int main() {
-
-  GLFWwindow *window;
-  if (!initWindow(&window)) {
-    return -1;
-  }
-
-  // render loop
-  // 渲染循环， 不然绘制一个图形后，程序就退出了
-  // -----------
-  while (!glfwWindowShouldClose(window)) {
-    // input
-    // -----
-    processInput(window);
-
-    // render
-    // ------
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-
-    glDrawArrays(GL_TRIANGLES, 0, 3);
-    // glBindVertexArray(0); // no need to unbind it every time
-
-    // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved
-    // etc.)
-    // -------------------------------------------------------------------------------
-    glfwSwapBuffers(window);
-    glfwPollEvents();
-  }
-
-  // glfw: terminate, clearing all previously allocated GLFW resources.
-  // ------------------------------------------------------------------
-  glfwTerminate();
-  return 0;
-}
 
 // process all input: query GLFW whether relevant keys are pressed/released this
 // 输入控制函数， 监听键盘输入， 按下 ESC 键退出程序
