@@ -1,4 +1,5 @@
 ADD_SUBDIRECTORY(01-textures)
 ADD_SUBDIRECTORY(02-more-textures)
 ADD_SUBDIRECTORY(03-four-face)
+ADD_SUBDIRECTORY(04-single-texel)
 ADD_SUBDIRECTORY(refactor)
