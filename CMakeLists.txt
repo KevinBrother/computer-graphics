@@ -3,7 +3,7 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8 ) #设定最小版本号
 PROJECT(CG)                       #设定工程名
 
-SET(PROJECT_ROOT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../")
+SET(PROJECT_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 
 # SET(CMAKE_CXX_COMPILER "g++")         #设置编译器（可选的有gcc，g++）
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -march=native -O3 -pthread" ) # 设置编译选项, 允许c++11标准、O3优化、多线程。match选项可避免一些cpu上的问题
@@ -24,5 +24,5 @@ LINK_DIRECTORIES(${PROJECT_ROOT_PATH}/dependencies/library ${CMAKE_SOURCE_DIR}/l
 find_package (Threads REQUIRED)
 
 #增加子文件夹(注意我们的src路径是通过子文件夹的形式添加的，在这里面也是可以些CMakeLists.txt的)
-ADD_SUBDIRECTORY(${CMAKE_SOURCE_DIR}/src) # 多目录，把 src 目录加进来，src 里面才是真正编译 main 和 tools 的
+ADD_SUBDIRECTORY(${CMAKE_SOURCE_DIR}/cmake/src) # 多目录，把 src 目录加进来，src 里面才是真正编译 main 和 tools 的
 # 或者是 ADD_SUBDIRECTORY(src)
