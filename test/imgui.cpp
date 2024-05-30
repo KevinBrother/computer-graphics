@@ -30,8 +30,11 @@ int main() {
   // -----------------------
 
   float f = 0.0f;
+  float df = 0.1f;
+
   ImVec4 clear_color = ImVec4(0.21, 0.3, 0.21, 1.0);
   char buf[256] = "hello world";  // 使用256作为缓冲区大小，可以根据需求调整大小
+  bool show_demo_window = true;
 
   // render loop
   // 渲染循环， 不然绘制一个图形后，程序就退出了
@@ -48,8 +51,26 @@ int main() {
     ImGui::Begin("imgui");
     ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
     ImGui::InputText("string", buf, IM_ARRAYSIZE(buf));
+    ImGui::Checkbox("Demo Window", &show_demo_window);
+    ImGui::SameLine();
+    ImGui::Checkbox("Demo Window2", &show_demo_window);
+    ImGui::DragFloat("drag float", &df, 0.1f, 0.0f, 5.0f);
     ImGui::SliderFloat("float", &f, 0.0f, 5.0f);
     ImGui::ColorEdit3("clear color3", (float *)&clear_color);
+    if (ImGui::TreeNode("Parent Node")) {
+      if (ImGui::TreeNode("Child Node 1")) {
+        // Child Node 1 内容
+        ImGui::Text("Child Node 1 Content");
+        ImGui::TreePop();
+      }
+
+      if (ImGui::TreeNode("Child Node 2")) {
+        // Child Node 2 内容
+        ImGui::Text("Child Node 2 Content");
+        ImGui::TreePop();
+      }
+      ImGui::TreePop();
+    }
     ImGui::End();
 
     cout << "f = " << f << endl;
