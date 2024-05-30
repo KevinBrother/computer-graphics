@@ -3,7 +3,7 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8 ) #设定最小版本号
 PROJECT(CG)                       #设定工程名
 
-SET(PROJECT_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR})
+SET(PROJECT_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/)
 
 # SET(CMAKE_CXX_COMPILER "g++")         #设置编译器（可选的有gcc，g++）
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -march=native -O3 -pthread" ) # 设置编译选项, 允许c++11标准、O3优化、多线程。match选项可避免一些cpu上的问题
