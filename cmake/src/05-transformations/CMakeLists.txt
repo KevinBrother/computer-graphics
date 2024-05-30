@@ -1,1 +1,2 @@
 ADD_SUBDIRECTORY("01-rotating")
+ADD_SUBDIRECTORY("02-animation")
