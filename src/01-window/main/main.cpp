@@ -13,6 +13,8 @@ int main() {
     return -1;
   }
 
+  std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
+
   // render loop
   // 渲染循环， 不然绘制一个图形后，程序就退出了
   // -----------
