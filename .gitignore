@@ -11,3 +11,4 @@ bin
 lib
 cmake-build-debug
 .idea
+build
