@@ -22,12 +22,13 @@ int main() {
   // set up vertex data (and buffer(s)) and configure vertex attributes
   // ------------------------------------------------------------------
   float vertices[] = {
-          //     ---- 位置 ----       ---- 颜色 ----     - 纹理坐标 -
-          0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f,  // 右上
-          0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // 右下
-          -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,// 左下
-          -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f  // 左上
+          //     ---- 位置 ----        - 纹理坐标 -
+          0.5f, 0.5f, 0.0f, 1.0f, 1.0f,  // 右上
+          0.5f, -0.5f, 0.0f, 1.0f, 0.0f, // 右下
+          -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,// 左下
+          -0.5f, 0.5f, 0.0f, 0.0f, 1.0f  // 左上
   };
+
 
   unsigned int indices[] = {
           0, 1, 3,// first triangle
@@ -75,16 +76,11 @@ int main() {
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
   // 位置属性
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *) 0);
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *) 0);
   glEnableVertexAttribArray(0);
-
-  // 颜色属性
-  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *) (3 * sizeof(float)));
-  glEnableVertexAttribArray(1);
-
   // 纹理坐标属性
-  glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *) (6 * sizeof(float)));
-  glEnableVertexAttribArray(2);
+  glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *) (3 * sizeof(float)));
+  glEnableVertexAttribArray(1);
 
   ourShader.use();
   ourShader.setInt("texture1", 0);// 这儿的 name 需要 和 fs 中的 一致
