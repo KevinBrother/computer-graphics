@@ -1,2 +1,3 @@
 ADD_SUBDIRECTORY(01-camera)
 ADD_SUBDIRECTORY(02-freedom-move)
+ADD_SUBDIRECTORY(03-camera-mouse)
