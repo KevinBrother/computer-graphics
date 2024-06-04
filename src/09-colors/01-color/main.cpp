@@ -2,11 +2,11 @@
 #include <GLFW/glfw3.h>
 #define STB_IMAGE_IMPLEMENTATION
 #include "../../utils/init-window.h"
+#include "../../utils/imgui-utils.cpp"
 #include "shader_s.h"
 #include "tools/camera.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 
 // set up vertex data (and buffer(s)) and configure vertex attributes
 // ------------------------------------------------------------------
@@ -85,6 +85,8 @@ int main() {
     return -1;
   };
 
+  ImGuiUtils::init(&window);
+
   glEnable(GL_DEPTH_TEST);// enable depth testing
 
   glfwSetCursorPosCallback(window, mouse_callback);
@@ -129,6 +131,12 @@ int main() {
 
     processInput(window, deltaTime);
 
+    ImGuiUtils::newFrame();
+
+    ImGui::Begin("imgui");
+    ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+    ImGui::Text("Camera position: %.3f, %.3f, %.3f", camera.Position.x, camera.Position.y, camera.Position.z);
+
     // render
     // ------
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
@@ -162,11 +170,15 @@ int main() {
     model = glm::scale(model, glm::vec3(0.2f));
     lightingShader.setMat4("model", model);
 
+    ImGui::Text("Light position: %.3f, %.3f, %.3f", model[3].x, model[3].y, model[3].z);
+
     glBindVertexArray(lightVAO);
     glDrawArrays(GL_TRIANGLES, 0, 36);
 
     // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
     // -------------------------------------------------------------------------------
+    ImGuiUtils::render();
+
     glfwSwapBuffers(window);
     glfwPollEvents();
   }
