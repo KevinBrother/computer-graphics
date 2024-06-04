@@ -14,13 +14,13 @@ void processInput(GLFWwindow **window, glm::vec3 *cameraPosP, glm::vec3 *cameraT
     glfwSetWindowShouldClose(*window, true);
 
   if (glfwGetKey(*window, GLFW_KEY_W) == GLFW_PRESS)
-    *cameraPosP = *cameraPosP + *cameraSpeed * *cameraTargetP;
+    *cameraPosP += *cameraSpeed * *cameraTargetP;
   if (glfwGetKey(*window, GLFW_KEY_S) == GLFW_PRESS)
-    *cameraPosP = *cameraPosP - *cameraSpeed * *cameraTargetP;
+    *cameraPosP -= *cameraSpeed * *cameraTargetP;
   if (glfwGetKey(*window, GLFW_KEY_A) == GLFW_PRESS)
-    *cameraPosP = *cameraPosP - glm::normalize(glm::cross(*cameraTargetP, *cameraUpP)) * *cameraSpeed;
+    *cameraPosP -= glm::normalize(glm::cross(*cameraTargetP, *cameraUpP)) * *cameraSpeed;
   if (glfwGetKey(*window, GLFW_KEY_D) == GLFW_PRESS)
-    *cameraPosP = *cameraPosP + glm::normalize(glm::cross(*cameraTargetP, *cameraUpP)) * *cameraSpeed;
+    *cameraPosP += glm::normalize(glm::cross(*cameraTargetP, *cameraUpP)) * *cameraSpeed;
 }
 
 int main() {
