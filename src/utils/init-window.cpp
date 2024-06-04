@@ -9,6 +9,12 @@
 void processInput(GLFWwindow *window) {
   if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
     glfwSetWindowShouldClose(window, true);
+  if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+    std::cout << "Space key pressed" << std::endl;
+  if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+    std::cout << "Up key pressed" << std::endl;
+  if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+    std::cout << "W key pressed" << std::endl;
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback

@@ -1,27 +1,27 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #define STB_IMAGE_IMPLEMENTATION
+#include "../../utils/imgui-utils.cpp"
 #include "../../utils/init-window.h"
 #include "../../utils/texture-utils.h"
-#include "../../utils/imgui-utils.cpp"
 #include "shader_s.h"
 #include "stb_image.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-//void processInput(GLFWwindow *window, glm::vec3 *cameraPosP, glm::vec3 *cameraTargetP, glm::vec3 *cameraUpP) {
-//  if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-//    glfwSetWindowShouldClose(window, true);
-//
-//  if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-//    *cameraPosP = *cameraPosP + cameraSpeed * *cameraTargetP;
-//  if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-//    *cameraPosP = *cameraPosP - cameraSpeed * *cameraTargetP;
-//  if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-//    *cameraPosP = *cameraPosP - glm::normalize(glm::cross(*cameraTargetP, *cameraUpP)) * cameraSpeed;
-//  if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-//    *cameraPosP = *cameraPosP + glm::normalize(glm::cross(*cameraTargetP, *cameraUpP)) * cameraSpeed;
-//}
+void processInput(GLFWwindow **window, glm::vec3 *cameraPosP, glm::vec3 *cameraTargetP, glm::vec3 *cameraUpP, float *cameraSpeed) {
+  if (glfwGetKey(*window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    glfwSetWindowShouldClose(*window, true);
+
+  if (glfwGetKey(*window, GLFW_KEY_W) == GLFW_PRESS)
+    *cameraPosP = *cameraPosP + *cameraSpeed * *cameraTargetP;
+  if (glfwGetKey(*window, GLFW_KEY_S) == GLFW_PRESS)
+    *cameraPosP = *cameraPosP - *cameraSpeed * *cameraTargetP;
+  if (glfwGetKey(*window, GLFW_KEY_A) == GLFW_PRESS)
+    *cameraPosP = *cameraPosP - glm::normalize(glm::cross(*cameraTargetP, *cameraUpP)) * *cameraSpeed;
+  if (glfwGetKey(*window, GLFW_KEY_D) == GLFW_PRESS)
+    *cameraPosP = *cameraPosP + glm::normalize(glm::cross(*cameraTargetP, *cameraUpP)) * *cameraSpeed;
+}
 
 int main() {
   GLFWwindow *window;
@@ -30,7 +30,7 @@ int main() {
   }
 
   ImGuiUtils::init(&window);
-  glEnable(GL_DEPTH_TEST); // enable depth testing
+  glEnable(GL_DEPTH_TEST);// enable depth testing
 
   // build and compile our shader program
   // ------------------------------------
@@ -40,61 +40,59 @@ int main() {
   // ------------------------------------------------------------------
 
   float vertices[] = {
-          -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-          0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-          0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-          0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-          -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-          -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+          -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
+          0.5f, -0.5f, -0.5f, 1.0f, 0.0f,
+          0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+          0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+          -0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
+          -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
 
-          -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-          0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-          0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-          0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-          -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-          -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+          -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+          0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
+          0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
+          0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
+          -0.5f, 0.5f, 0.5f, 0.0f, 1.0f,
+          -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
 
-          -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-          -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-          -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-          -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-          -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-          -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+          -0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+          -0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+          -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+          -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+          -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+          -0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
 
-          0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-          0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-          0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-          0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-          0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-          0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+          0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+          0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+          0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+          0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+          0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+          0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
 
-          -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-          0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-          0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-          0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-          -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-          -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+          -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+          0.5f, -0.5f, -0.5f, 1.0f, 1.0f,
+          0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
+          0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
+          -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+          -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
 
-          -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-          0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-          0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-          0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-          -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-          -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
-  };
+          -0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
+          0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+          0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+          0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+          -0.5f, 0.5f, 0.5f, 0.0f, 0.0f,
+          -0.5f, 0.5f, -0.5f, 0.0f, 1.0f};
 
   glm::vec3 cubePositions[] = {
-          glm::vec3( 0.0f,  0.0f,  0.0f),
-          glm::vec3( 2.0f,  5.0f, -15.0f),
+          glm::vec3(0.0f, 0.0f, 0.0f),
+          glm::vec3(2.0f, 5.0f, -15.0f),
           glm::vec3(-1.5f, -2.2f, -2.5f),
           glm::vec3(-3.8f, -2.0f, -12.3f),
-          glm::vec3( 2.4f, -0.4f, -3.5f),
-          glm::vec3(-1.7f,  3.0f, -7.5f),
-          glm::vec3( 1.3f, -2.0f, -2.5f),
-          glm::vec3( 1.5f,  2.0f, -2.5f),
-          glm::vec3( 1.5f,  0.2f, -1.5f),
-          glm::vec3(-1.3f,  1.0f, -1.5f)
-  };
+          glm::vec3(2.4f, -0.4f, -3.5f),
+          glm::vec3(-1.7f, 3.0f, -7.5f),
+          glm::vec3(1.3f, -2.0f, -2.5f),
+          glm::vec3(1.5f, 2.0f, -2.5f),
+          glm::vec3(1.5f, 0.2f, -1.5f),
+          glm::vec3(-1.3f, 1.0f, -1.5f)};
 
   // 生成纹理
   unsigned int texture;
@@ -150,21 +148,21 @@ int main() {
   float cameraSpeed = 0.05f;
 
   // 投影矩阵
-  glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)800 / (float)600, 0.1f, 100.0f);
+  glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float) 800 / (float) 600, 0.1f, 100.0f);
   ourShader.setMat4("projection", projection);
   // render loop
   // -----------
   while (!glfwWindowShouldClose(window)) {
     // input
-    // -----
-    processInput(window);
+    processInput(&window, &cameraPos, &cameraTarget, &cameraUp, &cameraSpeed);
+
     ImGuiUtils::newFrame();
 
     ImGui::Begin("imgui");
     ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
     ImGui::SliderFloat("float", &cameraSpeed, 0.0f, 5.0f);
-//    ImGui::SetNextWindowSize(ImVec2(200, 100));
-//    ImGui::SetNextItemWidth(400);
+    //    ImGui::SetNextWindowSize(ImVec2(200, 100));
+    //    ImGui::SetNextItemWidth(400);
 
     if (ImGui::Button("W")) {
       cameraPos += cameraSpeed * cameraTarget;
@@ -176,7 +174,7 @@ int main() {
       cameraPos -= glm::normalize(glm::cross(cameraTarget, cameraUp)) * cameraSpeed;
     }
     if (ImGui::Button("D")) {
-     cameraPos += glm::normalize(glm::cross(cameraTarget, cameraUp)) * cameraSpeed;
+      cameraPos += glm::normalize(glm::cross(cameraTarget, cameraUp)) * cameraSpeed;
     }
 
     // render
@@ -196,11 +194,11 @@ int main() {
 
     glBindVertexArray(VAO);
 
-    for(unsigned int i = 0; i < 10; i++) {
-      glm:: mat4 model = glm::mat4(1.0f);
+    for (unsigned int i = 0; i < 10; i++) {
+      glm::mat4 model = glm::mat4(1.0f);
       model = glm::translate(model, cubePositions[i]);
       float angle = 20.0f * i;
-      model = glm::rotate(model,  glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+      model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
       ourShader.setMat4("model", model);
 
       glDrawArrays(GL_TRIANGLES, 0, 36);
