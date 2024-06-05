@@ -139,35 +139,40 @@ int main() {
 
     ImGui::Begin("imgui");
     ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+    ImGui::Text("Camera position: %.3f, %.3f, %.3f", camera.Position.x, camera.Position.y, camera.Position.z);
 
     // render
     // ------
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    // 颜色属性
-    cubeShader.use();
-    cubeShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
-    cubeShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
-
-
     // 沿着 z 轴移动的光源
-    lightPos.x = cos(glfwGetTime()) * 2.0f;
-    lightPos.y = sin(glfwGetTime()) * 2.0f;
-    lightPos.z = 9.0f + sin(glfwGetTime());
+/*        lightPos.x = cos(glfwGetTime()) * 1.0f;
+        lightPos.y = sin(glfwGetTime()) * 1.0f;
+        lightPos.z = 7.0f + sin(glfwGetTime());*/
 
-    /*    // 沿着 y 轴移动光源
+        // 沿着 y 轴移动光源
+/*
     lightPos.x = cos(glfwGetTime()) * 2.0f;
-    lightPos.y = 1.0f;
-    lightPos.z = 10.0f + sin(glfwGetTime()) * 5.0f;*/
-
-    /*
-   // 沿着 x 轴移动光源
-    lightPos.x = 1.0f;
-    lightPos.y = cos(glfwGetTime()) * 2.0f;
-    lightPos.z = 10.0f + sin(glfwGetTime()) * 2.0f;
+    lightPos.y = 0.1f;
+    lightPos.z = 10.0f + sin(glfwGetTime()) * 5.0f;
 */
 
+   // 沿着 x 轴移动光源
+    lightPos.x = 0.1f;
+    lightPos.y = cos(glfwGetTime()) * 2.0f;
+    lightPos.z = 10.0f + sin(glfwGetTime()) * 2.0f;
+
+//    lightPos.x = 1.2f;
+//    lightPos.y = 2.0f;
+//    lightPos.z = 3.0f;
+
+    // 颜色属性
+    cubeShader.use();
+    cubeShader.setVec3("objectColor", 0.027f, 0.278f, 0.0314f);
+//    cubeShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
+    cubeShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
+    cubeShader.setVec3("viewPos", camera.Position);
     cubeShader.setVec3("lightPos", lightPos);
     ImGui::Text("lightPos position: %.3f, %.3f, %.3f", lightPos.x, lightPos.y, lightPos.z);
 
