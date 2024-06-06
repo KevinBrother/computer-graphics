@@ -44,3 +44,9 @@ brew install glad
     - GLAD 是 OpenGL 加载器自动生成器，它能够根据 OpenGL 版本和平台自动生成函数指针。
     - 它支持多种编程语言，包括C/C++、Python、Rust等，使开发者能够方便地访问和使用OpenGL的功能。
     - GLAD的主要目标是简化OpenGL的初始化过程，使得开发者能够更快速、高效地开始使用OpenGL进行图形编程。
+
+
+## 待解决问题
+[ ] 如何在vscode中运行、调试OpenGL程序
+[ ] 10-02-cube-rotating 中，如何物体自转时，光线效果能正常显示
+[ ] imgui 的中文乱码问题。
