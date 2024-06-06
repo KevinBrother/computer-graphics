@@ -163,7 +163,7 @@ int main() {
     cubeShader.use();
 //    cubeShader.setVec3("objectColor", 0.027f, 0.278f, 0.0314f);
     //    cubeShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
-//    cubeShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
+    cubeShader.setVec3("lightColor", lightColor);
     cubeShader.setVec3("viewPos", camera.Position);
     cubeShader.setVec3("lightPos", lightPos);
     ImGui::Text("lightPos position: %.3f, %.3f, %.3f", lightPos.x, lightPos.y, lightPos.z);
