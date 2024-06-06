@@ -4,7 +4,6 @@
 #include "../../utils/init-window.h"
 #include "../../utils/texture-utils.h"
 #include "shader_s.h"
-#include "stb_image.h"
 
 int main() {
   GLFWwindow *window;
@@ -32,31 +31,10 @@ int main() {
   };
 
   // 生成纹理
-  unsigned int texture;
   stbi_set_flip_vertically_on_load(true);// tell stb_image.h to flip loaded texture's on the y-axis.
 
-  glGenTextures(1, &texture);
-  glBindTexture(GL_TEXTURE_2D, texture);
-
-  // 为当前绑定的纹理对象设置环绕、过滤方式
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-  loadTexture("./resources/container.jpg");
-
-  unsigned int texture2;
-  glGenTextures(1, &texture2);
-  glBindTexture(GL_TEXTURE_2D, texture2);
-
-  // 为当前绑定的纹理对象设置环绕、过滤方式
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-  loadTexture("./resources/awesomeFace.png", GL_RGBA, GL_RGBA);
+  unsigned int texture1 = loadTexture("./resources/container.jpg");
+  unsigned int texture2 = loadTexture("./resources/awesomeFace.png");
 
   unsigned int VBO, VAO, EBO;
   glGenVertexArrays(1, &VAO);
@@ -103,7 +81,7 @@ int main() {
     ourShader.use();
 
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, texture);
+    glBindTexture(GL_TEXTURE_2D, texture1);
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, texture2);
 

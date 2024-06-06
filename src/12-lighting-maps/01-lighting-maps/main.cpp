@@ -8,7 +8,6 @@
 #include "tools/camera.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include "stb_image.h"
 
 // set up vertex data (and buffer(s)) and configure vertex attributes
 // ------------------------------------------------------------------
@@ -110,19 +109,7 @@ int main() {
   Shader lightingShader("./resources/lighting.vs.glsl", "./resources/lighting.fs.glsl");// you can name your shader files however you like
 
   // 生成纹理
-  unsigned int texture;
-  stbi_set_flip_vertically_on_load(true);// tell stb_image.h to flip loaded texture's on the y-axis.
-
-  glGenTextures(1, &texture);
-  glBindTexture(GL_TEXTURE_2D, texture);
-
-  // 为当前绑定的纹理对象设置环绕、过滤方式
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-  loadTexture("./resources/box-face.png", GL_RGBA, GL_RGBA);
+  unsigned int texture = loadTexture("./resources/box-face.png");
 
   cubeShader.use();
   cubeShader.setInt("material.diffuse", 0);
@@ -212,6 +199,9 @@ int main() {
     model = glm::translate(model, glm::vec3(0.0f, 0.0f, 10.0f));
     ImGui::Text("cube position: %.3f, %.3f, %.3f", model[3][0], model[3][1], model[3][2]);
     cubeShader.setMat4("model", model);
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, texture);
 
     // 渲染正方形物体
     glBindVertexArray(cubeVAO);

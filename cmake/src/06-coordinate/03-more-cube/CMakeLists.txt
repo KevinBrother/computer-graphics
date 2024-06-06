@@ -11,7 +11,6 @@ ADD_EXECUTABLE(06-03-more-cube.exe
         ${window}
         ${PROJECT_ROOT_PATH}/glad.c
         ${PROJECT_ROOT_PATH}/src/utils/init-window.cpp
-        ${PROJECT_ROOT_PATH}/src/utils/texture-utils.cpp
 )
 
 #自定义目标作为依赖项添加进去

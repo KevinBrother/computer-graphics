@@ -11,7 +11,6 @@ ADD_EXECUTABLE(07-02-freedom-move.exe
         ${window}
         ${PROJECT_ROOT_PATH}/glad.c
         ${PROJECT_ROOT_PATH}/src/utils/init-window.cpp
-        ${PROJECT_ROOT_PATH}/src/utils/texture-utils.cpp
         ${PROJECT_ROOT_PATH}/dependencies/include/imgui/imgui_impl_glfw.cpp
         ${PROJECT_ROOT_PATH}/dependencies/include/imgui/imgui_impl_opengl3.cpp
         ${PROJECT_ROOT_PATH}/dependencies/include/imgui/imgui.cpp
