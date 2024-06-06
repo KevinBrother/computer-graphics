@@ -1,1 +1,2 @@
 ADD_SUBDIRECTORY(01-lighting)
+ADD_SUBDIRECTORY(02-cube-rotating)
