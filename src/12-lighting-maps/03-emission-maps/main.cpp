@@ -180,9 +180,6 @@ int main() {
     ImGui::Text("emissionMoveStep: %.3f",  sin(glfwGetTime()) * matrixMoveStepRate);
     emissionMatrix.matrixlight = (float)(1.0f + sin(glfwGetTime()) / 2 + 0.5f);
     emissionMatrix.matrixmove = (float)glfwGetTime();
-    cubeShader.setFloat("emissionMatrix.matrixlight",  emissionMatrix.matrixlight);
-    cubeShader.setFloat("emissionMatrix.matrixmove",  emissionMatrix.matrixmove);
-//    cubeShader.setFloat("emissionMatrix.matrixlight",  sin(glfwGetTime()) * matrixMoveStepRate);
 
     // render
     // ------
@@ -210,6 +207,9 @@ int main() {
     cubeShader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
     cubeShader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
     cubeShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
+
+    cubeShader.setFloat("emissionMatrix.matrixlight",  emissionMatrix.matrixlight);
+    cubeShader.setFloat("emissionMatrix.matrixmove",  emissionMatrix.matrixmove);
 
     // 观察矩阵与投影矩阵
     glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float) 800 / (float) 600, 0.1f, 100.0f);
