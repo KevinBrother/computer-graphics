@@ -50,3 +50,4 @@ brew install glad
 [ ] 如何在vscode中运行、调试OpenGL程序
 [ ] 10-02-cube-rotating 中，如何物体自转时，光线效果能正常显示
 [ ] imgui 的中文乱码问题。
+[ ] emission-map 的动画效果无法正常显示。
